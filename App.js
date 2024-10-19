@@ -1,6 +1,21 @@
 import { Text, View, Pressable } from "react-native";
+import { useState } from "react";
 
 export default function App() {
+  const [number, setNumber] = useState("0");
+
+  function handleOnNumber(newNumber, currentNumber) {
+    if (currentNumber == "0") {
+      setNumber(newNumber);
+    } else {
+      setNumber(currentNumber + newNumber);
+    }
+  }
+
+  function handleOnClear() {
+    setNumber("0");
+  }
+
   return (
     <View
       style={{
@@ -23,7 +38,7 @@ export default function App() {
           }}
         >
           <Text style={{ fontSize: 50, textAlign: "right", flex: 1 }}>
-            Hola
+            {number}
           </Text>
         </View>
         <View style={{ flexDirection: "row" }}>
@@ -224,6 +239,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("7", number)}
             >
               <Text>7</Text>
             </Pressable>
@@ -239,6 +255,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("8", number)}
             >
               <Text>8</Text>
             </Pressable>
@@ -254,6 +271,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("9", number)}
             >
               <Text>9</Text>
             </Pressable>
@@ -286,6 +304,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("4", number)}
             >
               <Text>4</Text>
             </Pressable>
@@ -301,6 +320,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("5", number)}
             >
               <Text>5</Text>
             </Pressable>
@@ -316,6 +336,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("6", number)}
             >
               <Text>6</Text>
             </Pressable>
@@ -348,6 +369,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("1", number)}
             >
               <Text>1</Text>
             </Pressable>
@@ -363,6 +385,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("2", number)}
             >
               <Text>2</Text>
             </Pressable>
@@ -378,6 +401,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("3", number)}
             >
               <Text>3</Text>
             </Pressable>
@@ -410,6 +434,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnClear}
             >
               <Text>C</Text>
             </Pressable>
@@ -425,6 +450,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
+              onPress={() => handleOnNumber("0", number)}
             >
               <Text>0</Text>
             </Pressable>
