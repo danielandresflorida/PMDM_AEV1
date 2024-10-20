@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function App() {
   const [number, setNumber] = useState("0");
+  let num = parseInt(number);
 
   function handleOnNumber(newNumber, currentNumber) {
     if (currentNumber == "0") {
@@ -11,6 +12,99 @@ export default function App() {
       setNumber(currentNumber + newNumber);
     }
   }
+
+  function handleOnInverse() {
+    num = 1 / num;
+    setNumber(num.toString());
+  }
+
+  function handleOnFactorial() {
+    for (let i = num - 1; i > 0; i--) {
+      num *= i;
+    }
+    setNumber(num.toString());
+  }
+
+  function handleOnSquareRoot() {
+    num = Math.sqrt(num);
+    setNumber(num.toString());
+  }
+
+  function handleOnDivision() {
+    setNumber(number + " / ");
+  }
+
+  function handleOnMultiplication() {
+    setNumber(number + " * ");
+  }
+
+  function handleOnSubstraction() {
+    setNumber(number + " - ");
+  }
+
+  function handleOnAddition() {
+    setNumber(number + " + ");
+  }
+
+  function handleOnOperation() {
+    let operation = number.split(" ");
+    let num1 = parseInt(operation[0]);
+    let num2 = parseInt(operation[2]);
+    switch (operation[1]) {
+      case "/":
+        num = num1 / num2;
+        break;
+      case "*":
+        num = num1 * num2;
+        break;
+      case "-":
+        num = num1 - num2;
+        break;
+      case "+":
+        num = num1 + num2;
+        break;
+    }
+    setNumber(num.toString());
+  }
+
+  function handleOnLogNep() {
+    num = Math.log(num);
+    setNumber(num.toString());
+  }
+
+  function handleOnLog() {
+    num = Math.log10(num);
+    setNumber(num.toString());
+  }
+
+  function handleOnPi() {}
+
+  function handleOnRad() {
+    num = num * (Math.PI / 180);
+    setNumber(num.toString());
+  }
+
+  function handleOnDeg() {
+    num = num * (180 / Math.PI);
+    setNumber(num.toString());
+  }
+
+  function handleOnSen() {
+    num = Math.sin(num);
+    setNumber(num.toString());
+  }
+
+  function handleOnCos() {
+    num = Math.cos(num);
+    setNumber(num.toString());
+  }
+
+  function handleOnTan() {
+    num = Math.tan(num);
+    setNumber(num.toString());
+  }
+
+  function handleOnComma() {}
 
   function handleOnClear() {
     setNumber("0");
@@ -53,6 +147,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnSen}
             >
               <Text>sen</Text>
             </Pressable>
@@ -68,6 +163,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnCos}
             >
               <Text>cos</Text>
             </Pressable>
@@ -83,6 +179,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnTan}
             >
               <Text>tan</Text>
             </Pressable>
@@ -98,6 +195,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnDeg}
             >
               <Text>deg</Text>
             </Pressable>
@@ -115,6 +213,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnLogNep}
             >
               <Text>ln</Text>
             </Pressable>
@@ -130,6 +229,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnLog}
             >
               <Text>log</Text>
             </Pressable>
@@ -145,6 +245,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnPi}
             >
               <Text>&Pi;</Text>
             </Pressable>
@@ -160,6 +261,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnRad}
             >
               <Text>rad</Text>
             </Pressable>
@@ -177,6 +279,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnInverse}
             >
               <Text>1/X</Text>
             </Pressable>
@@ -192,6 +295,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnFactorial}
             >
               <Text>!</Text>
             </Pressable>
@@ -207,6 +311,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnSquareRoot}
             >
               <Text>√</Text>
             </Pressable>
@@ -222,6 +327,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnDivision}
             >
               <Text>/</Text>
             </Pressable>
@@ -287,6 +393,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnMultiplication}
             >
               <Text>x</Text>
             </Pressable>
@@ -352,6 +459,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnSubstraction}
             >
               <Text>-</Text>
             </Pressable>
@@ -417,6 +525,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnAddition}
             >
               <Text>+</Text>
             </Pressable>
@@ -481,6 +590,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnOperation}
             >
               <Text>=</Text>
             </Pressable>
