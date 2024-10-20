@@ -3,7 +3,13 @@ import { useState } from "react";
 
 export default function App() {
   const [number, setNumber] = useState("0");
-  let num = parseInt(number);
+  let num;
+
+  if (number.includes(".")) {
+    num = parseFloat(number);
+  } else {
+    num = parseInt(number);
+  }
 
   function handleOnNumber(newNumber, currentNumber) {
     if (currentNumber == "0") {
@@ -48,8 +54,20 @@ export default function App() {
 
   function handleOnOperation() {
     let operation = number.split(" ");
-    let num1 = parseInt(operation[0]);
-    let num2 = parseInt(operation[2]);
+    let num1;
+    let num2;
+    if (operation[0].includes(".")) {
+      num1 = parseFloat(operation[0]);
+    } else {
+      num1 = parseInt(operation[0]);
+    }
+
+    if (operation[2].includes(".")) {
+      num2 = parseFloat(operation[2]);
+    } else {
+      num2 = parseInt(operation[2]);
+    }
+
     switch (operation[1]) {
       case "/":
         num = num1 / num2;
@@ -77,7 +95,14 @@ export default function App() {
     setNumber(num.toString());
   }
 
-  function handleOnPi() {}
+  function handleOnPi() {
+    let operation = number.split(" ");
+    if (operation.length == 1) {
+      setNumber(Math.PI.toString());
+    } else {
+      setNumber(number + Math.PI.toString());
+    }
+  }
 
   function handleOnRad() {
     num = num * (Math.PI / 180);
@@ -104,7 +129,20 @@ export default function App() {
     setNumber(num.toString());
   }
 
-  function handleOnComma() {}
+  function handleOnComma() {
+    let operation = number.split(" ");
+    if (operation.length == 1) {
+      if (!operation[0].includes(".")) {
+        setNumber(number + ".");
+      }
+    } else {
+      if (operation[2] == "") {
+        setNumber(number + "0.");
+      } else if (!operation[2].includes(".")) {
+        setNumber(number + ".");
+      }
+    }
+  }
 
   function handleOnClear() {
     setNumber("0");
@@ -575,6 +613,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "gray",
               }}
+              onPress={handleOnComma}
             >
               <Text>,</Text>
             </Pressable>
