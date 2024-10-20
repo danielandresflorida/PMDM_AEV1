@@ -2,150 +2,121 @@ import { Text, View, Pressable } from "react-native";
 import { useState } from "react";
 
 export default function App() {
-  const [number, setNumber] = useState("0");
-  let num;
-
-  if (number.includes(".")) {
-    num = parseFloat(number);
-  } else {
-    num = parseInt(number);
-  }
+  const [number, setNumber] = useState(0);
+  const [numAux, setNumAux] = useState(null);
+  const [ope, setOpe] = useState(null);
 
   function handleOnNumber(newNumber, currentNumber) {
-    if (currentNumber == "0") {
+    if (currentNumber.toString() == "0" || currentNumber == null) {
       setNumber(newNumber);
     } else {
-      setNumber(currentNumber + newNumber);
+      setNumber(parseFloat(currentNumber.toString() + newNumber.toString()));
     }
   }
 
   function handleOnInverse() {
-    num = 1 / num;
-    setNumber(num.toString());
+    setNumber(1 / number);
   }
 
   function handleOnFactorial() {
-    for (let i = num - 1; i > 0; i--) {
-      num *= i;
+    let result = number;
+    for (let i = number - 1; i > 0; i--) {
+      result *= i;
     }
-    setNumber(num.toString());
+    setNumber(result);
   }
 
   function handleOnSquareRoot() {
-    num = Math.sqrt(num);
-    setNumber(num.toString());
+    setNumber(Math.sqrt(number));
   }
 
   function handleOnDivision() {
-    setNumber(number + " / ");
+    setNumAux(number);
+    setOpe("/");
+    setNumber("");
   }
 
   function handleOnMultiplication() {
-    setNumber(number + " * ");
+    setNumAux(number);
+    setOpe("*");
+    setNumber("");
   }
 
   function handleOnSubstraction() {
-    setNumber(number + " - ");
+    setNumAux(number);
+    setOpe("-");
+    setNumber("");
   }
 
   function handleOnAddition() {
-    setNumber(number + " + ");
+    setNumAux(number);
+    setOpe("+");
+    setNumber("");
   }
 
   function handleOnOperation() {
-    let operation = number.split(" ");
-    let num1;
-    let num2;
-    if (operation[0].includes(".")) {
-      num1 = parseFloat(operation[0]);
-    } else {
-      num1 = parseInt(operation[0]);
-    }
-
-    if (operation[2].includes(".")) {
-      num2 = parseFloat(operation[2]);
-    } else {
-      num2 = parseInt(operation[2]);
-    }
-
-    switch (operation[1]) {
+    let result;
+    switch (ope) {
       case "/":
-        num = num1 / num2;
+        result = numAux / number;
         break;
       case "*":
-        num = num1 * num2;
+        result = numAux * number;
         break;
       case "-":
-        num = num1 - num2;
+        result = numAux - number;
         break;
       case "+":
-        num = num1 + num2;
+        result = numAux + number;
         break;
     }
-    setNumber(num.toString());
+    setNumber(result);
   }
 
   function handleOnLogNep() {
-    num = Math.log(num);
-    setNumber(num.toString());
+    setNumber(Math.log(number));
   }
 
   function handleOnLog() {
-    num = Math.log10(num);
-    setNumber(num.toString());
+    setNumber(Math.log10(number));
   }
 
   function handleOnPi() {
-    let operation = number.split(" ");
-    if (operation.length == 1) {
-      setNumber(Math.PI.toString());
-    } else {
-      setNumber(number + Math.PI.toString());
-    }
+    setNumber(Math.PI);
   }
 
   function handleOnRad() {
-    num = num * (Math.PI / 180);
-    setNumber(num.toString());
+    setNumber(number * (Math.PI / 180));
   }
 
   function handleOnDeg() {
-    num = num * (180 / Math.PI);
-    setNumber(num.toString());
+    setNumber(number * (180 / Math.PI));
   }
 
   function handleOnSen() {
-    num = Math.sin(num);
-    setNumber(num.toString());
+    setNumber(Math.sin(number));
   }
 
   function handleOnCos() {
-    num = Math.cos(num);
-    setNumber(num.toString());
+    setNumber(Math.cos(number));
   }
 
   function handleOnTan() {
-    num = Math.tan(num);
-    setNumber(num.toString());
+    setNumber(Math.tan(number));
   }
 
   function handleOnComma() {
-    let operation = number.split(" ");
-    if (operation.length == 1) {
-      if (!operation[0].includes(".")) {
-        setNumber(number + ".");
-      }
-    } else {
-      if (operation[2] == "") {
-        setNumber(number + "0.");
-      } else if (!operation[2].includes(".")) {
+    if (!number.toString().includes(".")) {
+      if (number == "") {
+        setNumber("0.");
+      } else {
         setNumber(number + ".");
       }
     }
   }
 
   function handleOnClear() {
-    setNumber("0");
+    setNumber(0);
   }
 
   return (
@@ -383,7 +354,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("7", number)}
+              onPress={() => handleOnNumber(7, number)}
             >
               <Text>7</Text>
             </Pressable>
@@ -399,7 +370,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("8", number)}
+              onPress={() => handleOnNumber(8, number)}
             >
               <Text>8</Text>
             </Pressable>
@@ -415,7 +386,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("9", number)}
+              onPress={() => handleOnNumber(9, number)}
             >
               <Text>9</Text>
             </Pressable>
@@ -449,7 +420,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("4", number)}
+              onPress={() => handleOnNumber(4, number)}
             >
               <Text>4</Text>
             </Pressable>
@@ -465,7 +436,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("5", number)}
+              onPress={() => handleOnNumber(5, number)}
             >
               <Text>5</Text>
             </Pressable>
@@ -481,7 +452,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("6", number)}
+              onPress={() => handleOnNumber(6, number)}
             >
               <Text>6</Text>
             </Pressable>
@@ -515,7 +486,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("1", number)}
+              onPress={() => handleOnNumber(1, number)}
             >
               <Text>1</Text>
             </Pressable>
@@ -531,7 +502,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("2", number)}
+              onPress={() => handleOnNumber(2, number)}
             >
               <Text>2</Text>
             </Pressable>
@@ -547,7 +518,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("3", number)}
+              onPress={() => handleOnNumber(3, number)}
             >
               <Text>3</Text>
             </Pressable>
@@ -597,7 +568,7 @@ export default function App() {
                 height: 80,
                 backgroundColor: "blue",
               }}
-              onPress={() => handleOnNumber("0", number)}
+              onPress={() => handleOnNumber(0, number)}
             >
               <Text>0</Text>
             </Pressable>
